@@ -8,7 +8,7 @@ problem : "paraparaparadise"と"paragraph"に含まれる文字bi-gramの集合�
           XとYの和集合，積集合，差集合を求めよ．さらに，'se'というbi-gramがXおよびYに含まれるかどうかを調べよ．
 """
 
-from codes.capter_01.problem_no_05 import generate_n_gram
+from codes.chapter_01.problem_no_05 import generate_n_gram
 
 
 def problem_no_06():
