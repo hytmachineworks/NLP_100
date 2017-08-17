@@ -1,4 +1,4 @@
-# coding = utf-8
+# -*- coding: utf-8 -*-
 """
 create on : 2017/08/06
 project name : NLP_100
