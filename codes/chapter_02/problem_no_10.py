@@ -12,7 +12,7 @@ If you need file, please get above web site.
 
 problem : 行数をカウントせよ．確認にはwcコマンドを用いよ．
 
-makesure by bash command
+make sure by bash command
 $ wc -l hightemp.txt
 """
 HIGHTEMP_TEXT_PATH = "./hightemp.txt"

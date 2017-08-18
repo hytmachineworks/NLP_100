@@ -13,7 +13,7 @@ If you need file, please get above web site.
 problem : タブ1文字につきスペース1文字に置換せよ．
           確認にはsedコマンド，trコマンド，もしくはexpandコマンドを用いよ
 
-makesure by bash command
+make sure by bash command
 $ expand -t 1 ./hightemp.txt
 """
 HIGHTEMP_TEXT_PATH = "./hightemp.txt"
