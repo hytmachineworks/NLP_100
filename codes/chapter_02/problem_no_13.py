@@ -17,7 +17,7 @@ make sure by bash command
 $ paste col1.txt col2.txt
 """
 
-from codes.chapter_02.problem_no_12 import problem_no_12
+from problem_no_12 import problem_no_12
 
 HIGHTEMP_TEXT_PATH = "./hightemp.txt"
 
