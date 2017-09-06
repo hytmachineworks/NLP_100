@@ -27,7 +27,7 @@ def problem_no_21():
     country_info = get_country_info(listed=True)
 
     category_def_line = [line_data for line_data in country_info
-                         if re.match(r"^==.*==$", line_data)]
+                         if re.match(r"^\[\[Category:.*\]\]$", line_data)]
 
     return category_def_line
 
