@@ -19,9 +19,10 @@ import gzip
 import json
 
 
-def get_country_info(target_country="イギリス"):
+def get_country_info(target_country="イギリス", listed=False):
     """ get a country information from gzip json file
 
+    :param listed: output string change to list split by linefeed
     :param target_country: find out country
     :return: country information string
     """
@@ -42,6 +43,10 @@ def get_country_info(target_country="イギリス"):
         error_message = target_country
         error_message += "と言う国は登録されていません。"
         raise KeyError(error_message)
+
+    if listed:
+        line_splited_text = text.split("\n")
+        return line_splited_text
 
     return text
 
