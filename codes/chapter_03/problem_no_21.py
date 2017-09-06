@@ -18,7 +18,7 @@ import re
 from pprint import pprint
 
 
-def problem_no_21():
+def get_country_category_line_list():
     """ find a line definition of category name
 
     :return: find lines list
@@ -30,6 +30,15 @@ def problem_no_21():
                          if re.match(r"^\[\[Category:.*\]\]$", line_data)]
 
     return category_def_line
+
+
+def problem_no_21():
+    """ find a line definition of category name
+
+    :return: find lines list
+    """
+
+    return get_country_category_line_list()
 
 if __name__ == '__main__':
     pprint(problem_no_21())
