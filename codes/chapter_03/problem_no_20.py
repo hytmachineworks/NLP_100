@@ -19,7 +19,7 @@ import gzip
 import json
 
 
-def get_country_info(target_country):
+def get_country_info(target_country="イギリス"):
     """ get a country information from gzip json file
 
     :param target_country: find out country
