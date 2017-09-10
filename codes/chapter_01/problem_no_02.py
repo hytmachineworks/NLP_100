@@ -18,5 +18,5 @@ def problem_no_02(target_string):
     return new_strings
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(problem_no_02("パタトクカシーー"))

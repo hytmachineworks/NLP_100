@@ -38,5 +38,5 @@ def problem_no_08():
     return "complete"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(problem_no_08())

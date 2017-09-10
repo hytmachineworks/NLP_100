@@ -19,5 +19,5 @@ def problem_no_01(target_string):
     return new_string
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(problem_no_01("stresssed"))

@@ -47,5 +47,5 @@ def problem_no_13():
     return "combine complete"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     print(problem_no_13())

@@ -21,7 +21,7 @@ def problem_no_03(patrol_string, taxi_string):
     return new_string
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     a_string = "パトカー"
     b_string = "タクシー"
     print(problem_no_03(a_string, b_string))
