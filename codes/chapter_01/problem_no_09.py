@@ -7,9 +7,10 @@ file name : problem_no_09
 problem : スペースで区切られた単語列に対して，各単語の先頭と末尾の文字は残し，
           それ以外の文字の順序をランダムに並び替えるプログラムを作成せよ．
           ただし，長さが４以下の単語は並び替えないこととする．
-          適当な英語の文（例えば"I couldn't believe that I could actually understand
-          what I was reading : the phenomenal power of the human mind ."）を与え，
-          その実行結果を確認せよ．
+          適当な英語の文
+          （例えば"I couldn't believe that I could actually understand
+          what I was reading : the phenomenal power of the human mind ."）
+          を与え，その実行結果を確認せよ．
 """
 
 import random
@@ -38,7 +39,8 @@ def shuffle_sentence(sentence):
     """
     word_list = sentence.split(" ")
 
-    shuffled_sentence_list = [word if len(word) <= 4 else shuffle_word(word) for word in word_list]
+    shuffled_sentence_list = [word if len(word) <= 4 else shuffle_word(word)
+                              for word in word_list]
 
     shuffled_sentence = " ".join(shuffled_sentence_list)
 
@@ -51,8 +53,9 @@ def problem_no_09():
     :return: message string
     """
 
-    original_message = "I couldn't believe that I could actually understand what I "
-    original_message += "was reading : the phenomenal power of the human mind ."
+    original_message = ("I couldn't believe that I could actually understand "
+                        "what I was reading "
+                        ": the phenomenal power of the human mind .")
 
     print("original message : ", original_message)
 

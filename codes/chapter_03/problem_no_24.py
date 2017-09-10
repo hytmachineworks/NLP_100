@@ -30,27 +30,30 @@ def get_all_media_file_list():
 
     for item in country_info:
 
-        direct_file = re.match(r".* = [_ .,0-9a-zA-Z]*\.[0-9a-zA-Z]{3}$", item)
-        titled_file = re.match(r"(File|ファイル):.*\]", item)
+        direct_pattern = r".* = [_ .,0-9a-zA-Z]*\.[0-9a-zA-Z]{3}$"
+        direct_line = re.match(direct_pattern, item)
 
-        if direct_file:
-            direct_file_text = direct_file.group()
+        titled_pattern = r"(File|ファイル):.*\]"
+        titled_line = re.match(titled_pattern, item)
 
-            direct_repl = re.match(r".* = ", direct_file_text)
-            direct_file_name = direct_file_text.replace(direct_repl.group(), "")
+        if direct_line:
+            direct_text = direct_line.group()
 
-            all_media_file_list.append(direct_file_name)
+            direct_repl = re.match(r".* = ", direct_text)
+            direct_name = direct_text.replace(direct_repl.group(), "")
 
-        elif titled_file:
-            titled_file_text = titled_file.group()
+            all_media_file_list.append(direct_name)
 
-            titled_file_head = re.match(r"(File|ファイル):", titled_file_text)
-            titled_file_name = titled_file_text.replace(titled_file_head.group(), "")
+        elif titled_line:
+            titled_text = titled_line.group()
 
-            titled_file_foot = re.search(r"\|.*\]", titled_file_text)
-            titled_file_name = titled_file_name.replace(titled_file_foot.group(), "")
+            titled_head = re.match(r"(File|ファイル):", titled_text)
+            titled_name = titled_text.replace(titled_head.group(), "")
 
-            all_media_file_list.append(titled_file_name)
+            titled_file_foot = re.search(r"\|.*\]", titled_text)
+            titled_name = titled_name.replace(titled_file_foot.group(), "")
+
+            all_media_file_list.append(titled_name)
 
     return all_media_file_list
 

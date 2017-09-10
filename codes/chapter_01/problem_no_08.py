@@ -18,7 +18,9 @@ def cipher(text):
     :return: crypt text
     """
 
-    cipher_list = [str(219 - ord(t)) if t.isalpha() and t.islower() else t for t in text]
+    cipher_list = [str(219 - ord(t))
+                   if t.isalpha() and t.islower() else t
+                   for t in text]
 
     cipher_strings = "".join(cipher_list)
 

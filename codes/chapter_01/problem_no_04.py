@@ -4,8 +4,10 @@ create on : 2017/07/30
 project name : NLP_100
 file name : problem_no_04 
 
-problem : "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
-           という文を単語に分解し，各単語の（アルファベットの）文字数を先頭から出現順に並べたリストを作成せよ．
+problem : "Now I need a drink, alcoholic of course,
+           after the heavy lectures involving quantum mechanics."
+           という文を単語に分解し，各単語の（アルファベットの）
+           文字数を先頭から出現順に並べたリストを作成せよ．
 """
 
 
@@ -29,6 +31,7 @@ def problem_no_04(target_sentence):
 
 
 if __name__ == "__main__":
-    given_sentence = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
+    given_sentence =("Now I need a drink, alcoholic of course,"
+                     "after the heavy lectures involving quantum mechanics.")
     print(problem_no_04(given_sentence))
 
