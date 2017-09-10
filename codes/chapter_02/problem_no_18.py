@@ -38,5 +38,6 @@ def problem_no_18():
 
     return sorted_data
 
+
 if __name__ == '__main__':
     pprint(problem_no_18())

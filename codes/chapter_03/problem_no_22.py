@@ -34,5 +34,6 @@ def problem_no_22():
 
     return category_names
 
+
 if __name__ == '__main__':
     print(problem_no_22())

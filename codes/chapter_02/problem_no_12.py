@@ -45,5 +45,6 @@ def problem_no_12():
 
     return "divide file complete"
 
+
 if __name__ == "__main__":
     print(problem_no_12())

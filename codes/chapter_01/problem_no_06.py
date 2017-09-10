@@ -50,5 +50,6 @@ def problem_no_06():
 
     return return_message
 
+
 if __name__ == '__main__':
     print(problem_no_06())

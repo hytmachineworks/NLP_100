@@ -32,5 +32,6 @@ def problem_no_11():
 
     return replace_text
 
+
 if __name__ == "__main__":
     print(problem_no_11())

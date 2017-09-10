@@ -37,5 +37,6 @@ def problem_no_17():
 
     return first_row_data_uniq
 
+
 if __name__ == '__main__':
     pprint(problem_no_17())

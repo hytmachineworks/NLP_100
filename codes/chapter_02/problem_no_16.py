@@ -143,5 +143,6 @@ def problem_no_16():
 
     return "Output process complete"
 
+
 if __name__ == '__main__':
     print(problem_no_16())

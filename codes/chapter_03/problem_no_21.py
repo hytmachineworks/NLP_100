@@ -40,5 +40,6 @@ def problem_no_21():
 
     return get_country_category_line_list()
 
+
 if __name__ == '__main__':
     pprint(problem_no_21())

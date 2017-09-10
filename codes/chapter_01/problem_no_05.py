@@ -33,5 +33,6 @@ def problem_no_05(target_sequence):
 
     return "単語bi-gram : {}\n文字bi-gram : {}".format(word_bi_gram, string_bi_gram)
 
+
 if __name__ == '__main__':
     print(problem_no_05("I am an NLPer"))

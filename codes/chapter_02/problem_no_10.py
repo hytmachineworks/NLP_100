@@ -31,5 +31,6 @@ def problem_no_10():
 
     return "行数は、{}行です".format(rows)
 
+
 if __name__ == "__main__":
     print(problem_no_10())

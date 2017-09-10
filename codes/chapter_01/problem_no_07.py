@@ -34,5 +34,6 @@ def problem_no_07():
 
     return make_strings_by_x_y_z(x, y, z)
 
+
 if __name__ == '__main__':
     print(problem_no_07())

@@ -44,5 +44,6 @@ def problem_no_19():
 
     return output_data
 
+
 if __name__ == '__main__':
     pprint(problem_no_19())

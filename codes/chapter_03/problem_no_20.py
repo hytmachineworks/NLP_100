@@ -62,5 +62,6 @@ def problem_no_20():
 
     return get_country_info(target_country)
 
+
 if __name__ == '__main__':
     print(problem_no_20())

@@ -27,6 +27,7 @@ def problem_no_04(target_sentence):
 
     return word_length_list
 
+
 if __name__ == '__main__':
     given_sentence = "Now I need a drink, alcoholic of course, after the heavy lectures involving quantum mechanics."
     print(problem_no_04(given_sentence))
