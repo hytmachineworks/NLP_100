@@ -11,8 +11,6 @@ If you need file, please get above web site.
 
 problem : 記事から参照されているメディアファイルをすべて抜き出せ
 
-[[File: ()
-
 """
 
 from problem_no_20 import get_country_info
