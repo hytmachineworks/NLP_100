@@ -23,6 +23,11 @@ from problem_no_26 import rm_markup
 
 
 def get_country_basic_info_rm_internal_link():
+    """ get country basic info, but remove all emphasis markup,
+        and additionally remove internal links.
+
+    :return: country basic info text
+    """
 
     basic_info_original_text = get_country_basic_info_rm_emphasis()
 
