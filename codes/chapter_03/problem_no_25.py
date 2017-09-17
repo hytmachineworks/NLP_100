@@ -15,7 +15,7 @@ problem : 記事中に含まれる「基礎情報」テンプレートのフィ�
 """
 
 from problem_no_20 import get_country_info
-import regex,re
+import regex
 from pprint import pprint
 
 
@@ -56,7 +56,8 @@ def get_country_basic_info_text_to_dic(basic_info_text):
 
     for item in basic_info_split:
         item_split = item.strip("|").split("=")
-        item_data = [data.strip() for data in item_split]
+        item_list = [item_split[0], "=".join(item_split[1:])]
+        item_data = [data.strip() for data in item_list]
 
         country_dic[item_data[0]] = item_data[1]
 
