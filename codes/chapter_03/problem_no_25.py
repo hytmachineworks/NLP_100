@@ -50,7 +50,7 @@ def get_country_basic_info_text_to_dic(basic_info_text):
     :return: country basic info dictionary
     """
 
-    basic_info_split = regex.findall(r"\|[^|=]*=[^=]*\|", basic_info_text)
+    basic_info_split = regex.findall(r"\|[^|=]+=[^|=]+", basic_info_text)
 
     country_dic = {}
 
