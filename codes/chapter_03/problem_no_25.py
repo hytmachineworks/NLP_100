@@ -15,7 +15,7 @@ problem : 記事中に含まれる「基礎情報」テンプレートのフィ�
 """
 
 from problem_no_20 import get_country_info
-import regex
+import regex,re
 from pprint import pprint
 
 
@@ -50,8 +50,8 @@ def get_country_basic_info_text_to_dic(basic_info_text):
     :return: country basic info dictionary
     """
 
-    basic_info_split = regex.findall(r"\|[^|=]+=[^|=]+", basic_info_text)
-
+    pattern = r"\|[^|[\]=]+=.*?\n(?=[|][^|=[\]]+=|\}\}$)"
+    basic_info_split = regex.findall(pattern, basic_info_text, regex.DOTALL)
     country_dic = {}
 
     for item in basic_info_split:
