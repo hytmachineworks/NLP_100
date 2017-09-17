@@ -19,10 +19,10 @@ import regex
 from pprint import pprint
 
 
-def get_country_basic_info():
-    """ get country basic info from gzip file
+def get_country_basic_info_text():
+    """ find out country basic info from markup string
 
-    :return: country basic info dic
+    :return: find out country basic info text
     """
 
     country_info = get_country_info()
@@ -40,6 +40,16 @@ def get_country_basic_info():
     if not basic_info_text:
         raise KeyError("Not found country basic info.")
 
+    return basic_info_text
+
+
+def get_country_basic_info_text_to_dic(basic_info_text):
+    """ get country basic info from text to dictionary
+
+    :param basic_info_text: country basic info text
+    :return: country basic info dictionary
+    """
+
     basic_info_split = regex.findall(r"\|[^|=]*=[^=]*\|", basic_info_text)
 
     country_dic = {}
@@ -49,6 +59,19 @@ def get_country_basic_info():
         item_data = [data.strip() for data in item_split]
 
         country_dic[item_data[0]] = item_data[1]
+
+    return country_dic
+
+
+def get_country_basic_info():
+    """ get country basic info from gzip file
+
+    :return: country basic info dic
+    """
+
+    basic_info_text = get_country_basic_info_text()
+
+    country_dic = get_country_basic_info_text_to_dic(basic_info_text)
 
     return country_dic
 
