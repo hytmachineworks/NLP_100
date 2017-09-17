@@ -15,7 +15,7 @@ problem : 記事中に含まれる「基礎情報」テンプレートのフィ�
 """
 
 from problem_no_20 import get_country_info
-import re
+import regex
 from pprint import pprint
 
 
@@ -27,11 +27,20 @@ def get_country_basic_info():
 
     country_info = get_country_info()
 
-    basic_info = re.search(r"{{基礎情報.*☆}}☆",
-                           country_info.replace("\n", "☆"))
-    basic_info_text = basic_info.group().replace("☆", "\n")
+    pattern = r"(?<group>\{{2}(?:[^{}]+|(?&group))*\}{2})"
+    bracket_list = regex.findall(pattern, country_info)
 
-    basic_info_split = re.findall(r"\|[^|=]*=[^=]*\|", basic_info_text)
+    basic_info_text = ""
+
+    for bracket_text in bracket_list:
+        if "{{基礎情報" in bracket_text:
+            basic_info_text = bracket_text
+            break
+
+    if not basic_info_text:
+        raise KeyError("Not found country basic info.")
+
+    basic_info_split = regex.findall(r"\|[^|=]*=[^=]*\|", basic_info_text)
 
     country_dic = {}
 
