@@ -4,6 +4,10 @@ create on : 2017/09/17
 project name : NLP_100
 file name : problem_no_28 
 
+This problem using jawiki-country.json.gz
+This file is available at "http://www.cl.ecei.tohoku.ac.jp/nlp100/".
+This file NOT include this repository.
+If you need file, please get above web site.
 
 problem : 27の処理に加えて，テンプレートの値から
           MediaWikiマークアップを可能な限り除去し，
