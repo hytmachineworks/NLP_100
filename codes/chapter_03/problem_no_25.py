@@ -43,6 +43,27 @@ def get_country_basic_info_text():
     return basic_info_text
 
 
+def get_country_basic_info_text_to_list(basic_info_text):
+    """ get country basic info from text to list
+
+    :param basic_info_text: country basic info text
+    :return: country basic info list
+    """
+    pattern = r"\|[^|[\]=]+=.*?\n(?=[|][^|=[\]]+=|\}\}$)"
+    basic_info_split = regex.findall(pattern, basic_info_text, regex.DOTALL)
+
+    country_list = []
+
+    for item in basic_info_split:
+        item_split = item.strip("|").split("=")
+        item_list = [item_split[0], "=".join(item_split[1:])]
+        item_data = [data.strip() for data in item_list]
+
+        country_list.append(item_data)
+
+    return country_list
+
+
 def get_country_basic_info_text_to_dic(basic_info_text):
     """ get country basic info from text to dictionary
 
@@ -50,16 +71,8 @@ def get_country_basic_info_text_to_dic(basic_info_text):
     :return: country basic info dictionary
     """
 
-    pattern = r"\|[^|[\]=]+=.*?\n(?=[|][^|=[\]]+=|\}\}$)"
-    basic_info_split = regex.findall(pattern, basic_info_text, regex.DOTALL)
-    country_dic = {}
-
-    for item in basic_info_split:
-        item_split = item.strip("|").split("=")
-        item_list = [item_split[0], "=".join(item_split[1:])]
-        item_data = [data.strip() for data in item_list]
-
-        country_dic[item_data[0]] = item_data[1]
+    country_list = get_country_basic_info_text_to_list(basic_info_text)
+    country_dic = dict(country_list)
 
     return country_dic
 
