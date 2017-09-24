@@ -13,10 +13,10 @@ problem : 記事中に含まれる「基礎情報」テンプレートのフィ�
           辞書オブジェクトとして格納せよ．
 
 """
-
-from problem_no_20 import get_country_info
+import html
 import regex
 from pprint import pprint
+from problem_no_20 import get_country_info
 
 
 def get_country_basic_info_text():
@@ -39,6 +39,8 @@ def get_country_basic_info_text():
 
     if not basic_info_text:
         raise KeyError("Not found country basic info.")
+
+    basic_info_text = html.unescape(basic_info_text)
 
     return basic_info_text
 
