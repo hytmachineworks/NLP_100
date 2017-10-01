@@ -17,6 +17,28 @@ from pprint import pprint
 from problem_no_30 import get_neko_morpheme_list
 
 
+def get_value_from_morpheme_sentence(morpheme_list,
+                                     pos, pos1="", key="surface"):
+    """ find all pos value from morpheme list
+
+    :param morpheme_list: morphological analysis result
+    :param pos: find pos type
+    :param pos1: add condition's pos1
+    :param key: select return value's key
+    :return: value list
+    """
+
+    if pos1:
+        verb_list = [morpheme[key] for morpheme in morpheme_list
+                     if morpheme["pos"] == pos and morpheme["pos1"] == pos1]
+
+    else:
+        verb_list = [morpheme[key] for morpheme in morpheme_list
+                     if morpheme["pos"] == pos]
+
+    return verb_list
+
+
 def get_verb_from_morpheme_sentence(morpheme_list, key="surface"):
     """ find all verbs from morpheme list
 
@@ -25,8 +47,8 @@ def get_verb_from_morpheme_sentence(morpheme_list, key="surface"):
     :return: verb list
     """
 
-    verb_list = [morpheme[key] for morpheme in morpheme_list
-                 if morpheme["pos"] == "動詞"]
+    verb_list = get_value_from_morpheme_sentence(morpheme_list,
+                                                 pos="動詞", key=key)
 
     return verb_list
 
