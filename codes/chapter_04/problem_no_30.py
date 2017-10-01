@@ -19,6 +19,8 @@ problem : 形態素解析結果（neko.txt.mecab）を読み込むプログラ�
 import glob
 import json
 
+from pprint import pprint
+
 from tqdm import tqdm
 import MeCab
 
@@ -163,4 +165,4 @@ def problem_no_30():
 
 
 if __name__ == "__main__":
-    print(problem_no_30())
+    pprint(problem_no_30())
