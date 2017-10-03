@@ -56,7 +56,7 @@ def problem_no_37():
     plt.tight_layout()
 
     # plt.show()
-    plt.savefig("./problem_no_38.png")
+    plt.savefig("./problem_no_37.png")
 
     plt.close()
 
