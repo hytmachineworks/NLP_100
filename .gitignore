@@ -103,3 +103,4 @@ ENV/
 *.txt
 *.gz
 codes/chapter_04/neko.txt.mecab
+*.png
