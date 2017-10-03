@@ -30,7 +30,7 @@ def problem_no_38():
 
     sns.distplot(df_word_count["頻度"], kde=False)
 
-    plt.title("吾輩は猫であるにおける単語の発現頻度")
+    plt.title("「吾輩は猫である」における単語の発現頻度")
 
     plt.yscale("log")
     plt.ylabel("単語の個数")

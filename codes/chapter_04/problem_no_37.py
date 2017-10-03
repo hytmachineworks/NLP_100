@@ -51,7 +51,7 @@ def problem_no_37():
 
     sns.barplot(x="単語", y="頻度", data=df_word_count, palette="viridis")
 
-    plt.title("吾輩は猫であるにおける単語頻度 上位10個")
+    plt.title("「吾輩は猫である」における単語頻度 上位10個")
 
     plt.tight_layout()
 
