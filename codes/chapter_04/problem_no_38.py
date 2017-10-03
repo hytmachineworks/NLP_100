@@ -47,4 +47,3 @@ def problem_no_38():
 
 if __name__ == "__main__":
     print(problem_no_38())
-
