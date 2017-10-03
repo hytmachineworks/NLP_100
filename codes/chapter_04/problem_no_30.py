@@ -9,6 +9,11 @@ This file is available at "http://www.cl.ecei.tohoku.ac.jp/nlp100/".
 This file NOT include this repository.
 If you need file, please get above web site.
 
+preparation : 夏目漱石の小説『吾輩は猫である』の文章（neko.txt）を
+              MeCabを使って形態素解析し，その結果をneko.txt.mecabという
+              ファイルに保存せよ．このファイルを用いて，
+              以下の問に対応するプログラムを実装せよ．
+
 problem : 形態素解析結果（neko.txt.mecab）を読み込むプログラムを実装せよ．
           ただし，各形態素は表層形（surface），基本形（base），品詞（pos），
           品詞細分類1（pos1）をキーとするマッピング型に格納し，
