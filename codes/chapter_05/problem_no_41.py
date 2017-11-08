@@ -74,10 +74,10 @@ def sentence_phrase_to_chunk(sentence_list):
     return all_sentence_chunk
 
 
-def problem_no_41():
-    """ use CaboCha result made from neko.txt store chunking result
+def get_neko_chunk_list():
+    """ neko_chunk_list make from neko.txt.cabocha
 
-    :return: message string
+    :return: neko_chunk_list list
     """
 
     with open("./neko.txt.cabocha", mode="r", encoding="utf-8") as f:
@@ -86,6 +86,16 @@ def problem_no_41():
     neko_sentences = neko_cabocha.split("EOS\n")
 
     neko_chunk_list = sentence_phrase_to_chunk(neko_sentences)
+
+    return neko_chunk_list
+
+
+def problem_no_41():
+    """ use CaboCha result made from neko.txt store chunking result
+
+    :return: message string
+    """
+    neko_chunk_list = get_neko_chunk_list()
 
     print("show morpheme result sentence no.8")
 
