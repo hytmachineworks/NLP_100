@@ -16,10 +16,11 @@ problem : 係り元の文節と係り先の文節のテキストを
 from problem_no_41 import get_neko_chunk_list
 
 
-def source_and_destination(chunk_sentence):
+def source_and_destination(chunk_sentence, dst_pos_include=""):
     """ get pair of source and destination phrase
 
     :param chunk_sentence: chunked sentence list
+    :param dst_pos_include: destination phrase include assign pos
     :return: None
     """
 
@@ -35,17 +36,45 @@ def source_and_destination(chunk_sentence):
         phrase_string = "".join(phrase_list)
         return phrase_string
 
+    def chunk_include_pos_detect(chunk_phrase, detect_pos):
+
+        phrase_pos_list = [morph.pos for morph in chunk_phrase.morphs
+                           if morph.pos == detect_pos]
+
+        detect_result = True if phrase_pos_list else False
+
+        return detect_result
+
+    src_dst_list = []
+    output_format = "{frm}\t{dst}"
+
     for chunk in chunk_sentence:
 
         dst = chunk.dst
 
-        if dst != -1:
+        if dst != -1 and dst_pos_include:
+            skip_or_not = chunk_include_pos_detect(chunk_sentence[dst],
+                                                   dst_pos_include)
+
+        elif dst != -1 and not dst_pos_include:
+            skip_or_not = True
+
+        else:
+            skip_or_not = False
+
+        if skip_or_not:
             frm_phrase = chunk_to_phrase(chunk)
             dst_phrase = chunk_to_phrase(chunk_sentence[dst])
 
-            output_format = "{frm}\t{dst}"
+        else:
+            frm_phrase = ""
+            dst_phrase = ""
 
-            print(output_format.format(frm=frm_phrase, dst=dst_phrase))
+        if frm_phrase and dst_phrase:
+            output_buf = output_format.format(frm=frm_phrase, dst=dst_phrase)
+            src_dst_list.append(output_buf)
+
+    return src_dst_list
 
 
 def problem_no_42():
@@ -57,11 +86,15 @@ def problem_no_42():
 
     for neko_chunk in neko_chunk_list:
 
-        if neko_chunk:
+        src_dst_list = source_and_destination(neko_chunk)
+
+        if src_dst_list:
 
             print("<-- split sentence")
 
-            source_and_destination(neko_chunk)
+            output_string = "\n".join(src_dst_list)
+            # print_string = output_string.replace("\t", " => ")
+            print(output_string)
 
             print("split sentence -->\n")
 
