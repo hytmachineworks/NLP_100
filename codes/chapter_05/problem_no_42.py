@@ -37,6 +37,12 @@ def source_and_destination(chunk_sentence, dst_pos_include=""):
         return phrase_string
 
     def chunk_include_pos_detect(chunk_phrase, detect_pos):
+        """ check phrase include specify pos
+
+        :param chunk_phrase: search phrase include pos class chunk
+        :param detect_pos: specify pos string
+        :return: detect result boolean
+        """
 
         phrase_pos_list = [morph.pos for morph in chunk_phrase.morphs
                            if morph.pos == detect_pos]
