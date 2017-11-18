@@ -25,11 +25,11 @@ def problem_no_44():
     :return: message
     """
 
-    target_sentence_no = 7
+    target_sentence_no = 8
 
     neko_chunk_list = get_neko_chunk_list()
 
-    neko_chunk = neko_chunk_list[target_sentence_no]
+    neko_chunk = neko_chunk_list[target_sentence_no - 1]
 
     src_dst_list = source_and_destination(neko_chunk)
 
