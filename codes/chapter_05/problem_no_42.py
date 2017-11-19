@@ -16,6 +16,22 @@ problem : 係り元の文節と係り先の文節のテキストを
 from problem_no_41 import get_neko_chunk_list
 
 
+def chunk_include_pos_detect(chunk_phrase, detect_pos):
+    """ check phrase include specify pos
+
+    :param chunk_phrase: search phrase include pos class chunk
+    :param detect_pos: specify pos string
+    :return: detect result boolean
+    """
+
+    phrase_pos_list = [morph.pos for morph in chunk_phrase.morphs
+                       if morph.pos == detect_pos]
+
+    detect_result = True if phrase_pos_list else False
+
+    return detect_result
+
+
 def source_and_destination(chunk_sentence, dst_pos_include=""):
     """ get pair of source and destination phrase
 
@@ -35,21 +51,6 @@ def source_and_destination(chunk_sentence, dst_pos_include=""):
 
         phrase_string = "".join(phrase_list)
         return phrase_string
-
-    def chunk_include_pos_detect(chunk_phrase, detect_pos):
-        """ check phrase include specify pos
-
-        :param chunk_phrase: search phrase include pos class chunk
-        :param detect_pos: specify pos string
-        :return: detect result boolean
-        """
-
-        phrase_pos_list = [morph.pos for morph in chunk_phrase.morphs
-                           if morph.pos == detect_pos]
-
-        detect_result = True if phrase_pos_list else False
-
-        return detect_result
 
     src_dst_list = []
     output_format = "{frm}\t{dst}"
