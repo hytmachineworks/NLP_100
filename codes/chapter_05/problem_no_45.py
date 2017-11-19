@@ -14,7 +14,7 @@ problem : 今回用いている文章をコーパスと見なし，
           動詞を述語，動詞に係っている文節の助詞を格と考え，
           述語と格をタブ区切り形式で出力せよ．
 
-          makesure command written in problem no.45
+          makesure command written in problem_no_45.cmd
 
 """
 from problem_no_41 import get_neko_chunk_list
