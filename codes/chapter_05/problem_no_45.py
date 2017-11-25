@@ -25,6 +25,7 @@ def predicate_analysis(chunk_sentence, arg_flag=False):
     """ get predicate analysis from chunk sentence
 
     :param chunk_sentence: phrase class of chunk list
+    :param arg_flag: include argument ore not boolean
     :return: predicate and case string
     """
 
