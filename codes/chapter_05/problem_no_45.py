@@ -21,8 +21,8 @@ from problem_no_41 import get_neko_chunk_list
 from problem_no_42 import chunk_include_pos_detect
 
 
-def get_predicate_and_case(chunk_sentence):
-    """ get predicate and case from chunk sentence
+def predicate_analysis(chunk_sentence, arg_flag=False):
+    """ get predicate analysis from chunk sentence
 
     :param chunk_sentence: phrase class of chunk list
     :return: predicate and case string
@@ -47,27 +47,42 @@ def get_predicate_and_case(chunk_sentence):
 
         return get_item_base
 
-    def predicate_case_to_dict(all_dict, predicate_value, case_value):
-        """ update predicate and case dictionary
+    def get_argument(chunk_phrase):
+        """ get argument from chunk phrase
+
+        :param chunk_phrase:chunk phrase class chunk
+        :return: argument string
+        """
+
+        phrase_list = [morph.surface for morph in chunk_phrase.morphs
+                       if morph.pos != "記号"]
+
+        argument_string = "".join(phrase_list)
+
+        return argument_string
+
+    def predicate_data_to_dict(all_dict, predicate_value, data_value):
+        """ update predicate analysis data dictionary
 
         :param all_dict: current dictionary dict
         :param predicate_value: predicate base form string
-        :param case_value: case base form string
+        :param data_value: data form string
         :return: updated dictionary dict
         """
 
         dict_keys = all_dict.keys()
 
         if predicate_value not in dict_keys:
-            all_dict[predicate_value] = [case_value]
+            all_dict[predicate_value] = [data_value]
 
         else:
             value_list = all_dict[predicate_value]
-            all_dict[predicate_value] = sorted([case_value] + value_list)
+            new_list = sorted([data_value] + value_list, key=lambda x: x[0])
+            all_dict[predicate_value] = new_list
 
         return all_dict
 
-    predicate_case_dict = {}
+    predicate_data_dict = {}
 
     for chunk in chunk_sentence:
 
@@ -89,12 +104,42 @@ def get_predicate_and_case(chunk_sentence):
             case = ""
             predicate = ""
 
-        if predicate and case:
-            predicate_case_dict = predicate_case_to_dict(predicate_case_dict,
-                                                         predicate, case)
+        if predicate and case and not arg_flag:
+            dict_value = (case, "")
+            predicate_data_dict = predicate_data_to_dict(predicate_data_dict,
+                                                         predicate, dict_value)
 
-    predicate_case = [predicate+"\t"+" ".join(predicate_case_dict[predicate])
-                      for predicate in predicate_case_dict.keys()]
+        elif predicate and case and arg_flag:
+            argument = get_argument(chunk)
+            dict_value = (case, argument)
+            predicate_data_dict = predicate_data_to_dict(predicate_data_dict,
+                                                         predicate, dict_value)
+
+    def dict_to_string(dict_key):
+        """ get a case and argument string
+
+        :param dict_key: key string
+        :return: case and argument string
+        """
+
+        if not dict_key:
+            return []
+
+        data_value = predicate_data_dict[dict_key]
+
+        case_list = [data[0] for data in data_value]
+        arg_list = [data[1] for data in data_value]
+
+        return_string = " ".join(case_list)
+
+        if arg_flag:
+            return_string += "\t" + " ".join(arg_list)
+            return return_string
+
+        return return_string
+
+    predicate_case = [predicate+"\t"+dict_to_string(predicate)
+                      for predicate in predicate_data_dict.keys()]
 
     predicate_case_string = "\n".join(predicate_case)
 
@@ -109,9 +154,9 @@ def problem_no_45():
 
     neko_chunk_list = get_neko_chunk_list()
 
-    predicate_case_list = [get_predicate_and_case(neko_chunk)
+    predicate_case_list = [predicate_analysis(neko_chunk)
                            for neko_chunk in neko_chunk_list
-                           if get_predicate_and_case(neko_chunk)]
+                           if predicate_analysis(neko_chunk)]
 
     with open("./neko_predicate_case.txt", mode="w", encoding="utf-8") as f:
         f.write("\n".join(predicate_case_list))
