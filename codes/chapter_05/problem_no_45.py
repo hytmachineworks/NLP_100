@@ -85,12 +85,23 @@ def predicate_analysis(chunk_sentence, arg_flag=False, mining=False):
         return all_dict
 
     predicate_data_dict = {}
+    mining_predicate_list = []
 
     for chunk in chunk_sentence:
 
         dst = chunk.dst
 
-        if dst != -1:
+        predicate_flag = False
+
+        if dst != -1 and not mining:
+            src_flag = chunk_include_pos_detect(chunk, detect_pos="助詞")
+            dst_flag = chunk_include_pos_detect(chunk_sentence[dst],
+                                                detect_pos="動詞")
+        elif dst != -1 and mining:
+            predicate_flag = chunk_include_pos_detect(chunk,
+                                                      detect_pos="助詞",
+                                                      base="を")
+
             src_flag = chunk_include_pos_detect(chunk, detect_pos="助詞")
             dst_flag = chunk_include_pos_detect(chunk_sentence[dst],
                                                 detect_pos="動詞")
@@ -106,16 +117,24 @@ def predicate_analysis(chunk_sentence, arg_flag=False, mining=False):
             case = ""
             predicate = ""
 
-        if predicate and case and not arg_flag:
+        if predicate and case and not arg_flag and not mining:
             dict_value = (case, "")
             predicate_data_dict = predicate_data_to_dict(predicate_data_dict,
                                                          predicate, dict_value)
 
-        elif predicate and case and arg_flag:
+        elif predicate and case and arg_flag and not predicate_flag:
             argument = get_argument(chunk)
             dict_value = (case, argument)
             predicate_data_dict = predicate_data_to_dict(predicate_data_dict,
                                                          predicate, dict_value)
+
+        elif predicate and case and mining and predicate_flag:
+            argument = get_argument(chunk)
+            mining_predicate = {"argument": argument,
+                                "case": case,
+                                "arg_pred": argument+predicate,
+                                "predicate": predicate}
+            mining_predicate_list.append(mining_predicate)
 
     def dict_to_string(dict_key):
         """ get a case and argument string
@@ -140,8 +159,21 @@ def predicate_analysis(chunk_sentence, arg_flag=False, mining=False):
 
         return return_string
 
-    predicate_case = [predicate+"\t"+dict_to_string(predicate)
-                      for predicate in predicate_data_dict.keys()]
+    if not mining:
+        predicate_case = [predicate
+                          + "\t"+dict_to_string(predicate)
+                          for predicate in predicate_data_dict.keys()]
+
+    elif mining and mining_predicate_list:
+        predicate_list = list(predicate_data_dict.keys())
+
+        predicate_case = [mining_dict["arg_pred"]
+                          + "\t"+dict_to_string(mining_dict["predicate"])
+                          for mining_dict in mining_predicate_list
+                          if mining_dict["predicate"] in predicate_list]
+
+    else:
+        predicate_case = ""
 
     predicate_case_string = "\n".join(predicate_case)
 

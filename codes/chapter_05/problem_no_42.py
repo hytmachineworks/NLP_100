@@ -16,16 +16,22 @@ problem : 係り元の文節と係り先の文節のテキストを
 from problem_no_41 import get_neko_chunk_list
 
 
-def chunk_include_pos_detect(chunk_phrase, detect_pos):
+def chunk_include_pos_detect(chunk_phrase, detect_pos, base=""):
     """ check phrase include specify pos
 
     :param chunk_phrase: search phrase include pos class chunk
     :param detect_pos: specify pos string
+    :param base: specify base string
     :return: detect result boolean
     """
 
-    phrase_pos_list = [morph.pos for morph in chunk_phrase.morphs
-                       if morph.pos == detect_pos]
+    if not base:
+        phrase_pos_list = [morph.pos for morph in chunk_phrase.morphs
+                           if morph.pos == detect_pos]
+
+    else:
+        phrase_pos_list = [morph.pos for morph in chunk_phrase.morphs
+                           if morph.pos == detect_pos and morph.base == base]
 
     detect_result = True if phrase_pos_list else False
 
