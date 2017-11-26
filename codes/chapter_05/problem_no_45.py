@@ -21,6 +21,21 @@ from problem_no_41 import get_neko_chunk_list
 from problem_no_42 import chunk_include_pos_detect
 
 
+def get_argument_from_chunk(chunk_phrase):
+    """ get argument from chunk phrase
+
+    :param chunk_phrase:chunk phrase class chunk
+    :return: argument string
+    """
+
+    phrase_list = [morph.surface for morph in chunk_phrase.morphs
+                   if morph.pos != "記号"]
+
+    argument_string = "".join(phrase_list)
+
+    return argument_string
+
+
 def predicate_analysis(chunk_sentence, arg_flag=False, mining=False):
     """ get predicate analysis from chunk sentence
 
@@ -48,20 +63,6 @@ def predicate_analysis(chunk_sentence, arg_flag=False, mining=False):
         get_item_base = phrase_list[target_index]
 
         return get_item_base
-
-    def get_argument(chunk_phrase):
-        """ get argument from chunk phrase
-
-        :param chunk_phrase:chunk phrase class chunk
-        :return: argument string
-        """
-
-        phrase_list = [morph.surface for morph in chunk_phrase.morphs
-                       if morph.pos != "記号"]
-
-        argument_string = "".join(phrase_list)
-
-        return argument_string
 
     def predicate_data_to_dict(all_dict, predicate_value, data_value):
         """ update predicate analysis data dictionary
@@ -123,13 +124,13 @@ def predicate_analysis(chunk_sentence, arg_flag=False, mining=False):
                                                          predicate, dict_value)
 
         elif predicate and case and arg_flag and not predicate_flag:
-            argument = get_argument(chunk)
+            argument = get_argument_from_chunk(chunk)
             dict_value = (case, argument)
             predicate_data_dict = predicate_data_to_dict(predicate_data_dict,
                                                          predicate, dict_value)
 
         elif predicate and case and mining and predicate_flag:
-            argument = get_argument(chunk)
+            argument = get_argument_from_chunk(chunk)
             mining_predicate = {"argument": argument,
                                 "case": case,
                                 "arg_pred": argument+predicate,
