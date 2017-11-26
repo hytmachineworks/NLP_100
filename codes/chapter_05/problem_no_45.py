@@ -14,18 +14,19 @@ problem : 今回用いている文章をコーパスと見なし，
           動詞を述語，動詞に係っている文節の助詞を格と考え，
           述語と格をタブ区切り形式で出力せよ．
 
-          makesure command written in problem_no_45.cmd
+          make sure command written in problem_no_45.cmd
 
 """
 from problem_no_41 import get_neko_chunk_list
 from problem_no_42 import chunk_include_pos_detect
 
 
-def predicate_analysis(chunk_sentence, arg_flag=False):
+def predicate_analysis(chunk_sentence, arg_flag=False, mining=False):
     """ get predicate analysis from chunk sentence
 
     :param chunk_sentence: phrase class of chunk list
     :param arg_flag: include argument ore not boolean
+    :param mining: mining data special case boolean
     :return: predicate and case string
     """
 
