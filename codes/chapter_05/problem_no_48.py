@@ -20,7 +20,7 @@ from problem_no_41 import get_neko_chunk_list
 from problem_no_42 import chunk_include_pos_detect
 from problem_no_45 import get_argument_from_chunk
 
-CONNECT = "->"
+CONNECT = " -> "
 
 
 def get_phrase_path_from_index(start_index, chunk_sentence):
