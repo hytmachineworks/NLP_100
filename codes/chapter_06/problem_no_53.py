@@ -16,6 +16,10 @@ from bs4 import BeautifulSoup
 
 
 def get_nlp_soup():
+    """ read tokenize result xml to BeautifulSoup Class
+
+    :return: tokenize result BeautifulSoup Class
+    """
 
     with open("./nlp.txt.xml", mode="r") as f:
         xml = f.read()
