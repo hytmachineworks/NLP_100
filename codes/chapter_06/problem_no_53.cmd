@@ -1,0 +1,1 @@
+java -mx3g edu.stanford.nlp.pipeline.StanfordCoreNLP -file nlp.txt -outputFormat "xml"
