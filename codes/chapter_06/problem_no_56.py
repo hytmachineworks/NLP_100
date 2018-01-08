@@ -65,7 +65,7 @@ def replace_representative_mention(sentence_list, coreference_list):
 def problem_no_56():
     """ get replace mention to representative mention
 
-    :return: name list
+    :return: message
     """
     sentence_list = get_all_sentences(mode="list")
 
