@@ -16,15 +16,19 @@ problem : (. or ; or : or ? or !) → 空白文字 → 英大文字というパ�
 import re
 
 
-def get_all_sentences():
+def get_all_sentences(mode="str"):
     """ process to 1 row 1 sentence text from given text
 
+    :param mode: choice return type
     :return: processed sentence text
     """
     with open("./nlp.txt", mode="r", encoding="utf-8") as f:
         nlp_txt = f.read()
 
     sentence_list = re.findall(r"[A-Z].*?[.;:?!](?=[^\S]\s*[A-Z]?)", nlp_txt)
+
+    if mode == "list":
+        return sentence_list
 
     return "\n".join(sentence_list)
 
