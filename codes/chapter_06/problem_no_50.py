@@ -24,7 +24,7 @@ def get_all_sentences():
     with open("./nlp.txt", mode="r", encoding="utf-8") as f:
         nlp_txt = f.read()
 
-    sentence_list = re.findall(r"[A-Z].*?[.;:?!](?= [A-Z])", nlp_txt)
+    sentence_list = re.findall(r"[A-Z].*?[.;:?!](?=[^\S]\s*[A-Z]?)", nlp_txt)
 
     return "\n".join(sentence_list)
 
