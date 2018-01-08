@@ -105,3 +105,4 @@ ENV/
 codes/chapter_04/neko.txt.mecab
 *.png
 *.cabocha
+*.xml
