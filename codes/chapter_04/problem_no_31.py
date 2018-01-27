@@ -53,7 +53,7 @@ def get_verb_from_morpheme_sentence(morpheme_list, key="surface"):
     return verb_list
 
 
-def problem_no_30():
+def problem_no_31():
     """ get all verb list from  morphological analysis at problem no.30
 
     :return: all verb list
@@ -70,4 +70,4 @@ def problem_no_30():
 
 
 if __name__ == "__main__":
-    pprint(problem_no_30())
+    pprint(problem_no_31())
