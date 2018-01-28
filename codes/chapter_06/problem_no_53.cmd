@@ -1,1 +1,1 @@
-java -mx3g edu.stanford.nlp.pipeline.StanfordCoreNLP -file nlp.txt -outputFormat "xml"
+java -mx3g edu.stanford.nlp.pipeline.StanfordCoreNLP -annotators tokenize,ssplit,pos,lemma,ner,parse,dcoref -file nlp2.txt -outputFormat "xml"
