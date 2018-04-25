@@ -26,20 +26,19 @@ def search_area_artists(area):
     :return: search area artist list
     """
 
-    def find_area_artist(start_cur, pool, r):
+    def find_area_artist(start_cur, r):
         """ find area artist
 
         :param start_cur: start cursor number
-        :param pool: connection pool
         :param r: redis class
         :return: area artist list
         """
 
-        cur, keys = r.scan(start_cur, count=10000)
+        cur, keys = r.scan(start_cur)
 
-        find_artists = [(key.decode(), get_target_data(key.decode(), pool, r))
+        find_artists = [(key.decode(), get_target_data(key.decode(), r=r))
                         for key in keys
-                        if get_target_data(key.decode(), pool, r) == area]
+                        if get_target_data(key.decode(), r=r) == area]
 
         return cur, find_artists
 
@@ -55,7 +54,7 @@ def search_area_artists(area):
 
     while not flag:
 
-        cursor, search_value = find_area_artist(cursor, conn_pool, redis)
+        cursor, search_value = find_area_artist(cursor, redis)
         area_artists += search_value
 
         if cursor == 0:
@@ -76,7 +75,7 @@ def problem_no_62():
 
     artist_name_area_list = search_area_artists(area="Japan")
 
-    print(artist_name_area_list)
+    return artist_name_area_list
 
 
 if __name__ == "__main__":

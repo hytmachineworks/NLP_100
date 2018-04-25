@@ -18,32 +18,19 @@ from problem_no_60 import get_redis_connection
 from problem_no_60 import create_key_value_dict_from_json
 
 
-def get_target_data(key_str, pool, r):
+def get_target_data(key_str, r=None, db=0):
     """ get individual datas
 
     :param key_str: key string
-    :param pool: connection pool
     :param r: redis instance
+    :param db: database number
     :return: none
     """
 
-    command_name = "GET"
-    connection = pool.get_connection(command_name)
+    if not r:
+        pool, r = get_redis_connection(db=db)
 
-    try:
-        connection.send_command(command_name, key_str)
-        return_value = connection.read_response()
-
-    except (ConnectionError, TimeoutError) as e:
-        connection.disconnect()
-        if not connection.retry_on_timeout and isinstance(e, TimeoutError):
-            raise
-        connection.send_command(command_name)
-
-        return r.parse_response(connection, command_name)
-
-    finally:
-        pool.release(connection)
+    return_value = r.get(key_str)
 
     return return_value.decode()
 
@@ -64,9 +51,7 @@ def problem_no_61():
     for key_str in search_key_list:
         print("search :{}".format(key_str))
 
-        pool, r = get_redis_connection()
-
-        value = get_target_data(key_str, pool, r)
+        value = get_target_data(key_str, db=0)
 
         print("area is {}".format(value))
 

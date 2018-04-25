@@ -17,6 +17,7 @@ import time
 import gzip
 import json
 import redis
+from tqdm import tqdm
 
 
 def get_redis_connection(host="localhost", port=6379, db=0):
@@ -34,10 +35,13 @@ def get_redis_connection(host="localhost", port=6379, db=0):
     return pool, r
 
 
-def set_all_data(key_value_dict):
+def set_all_data(key_value_dict, host="127.0.0.1", port=6379, db=0):
     """ set all key value datas
 
     :param key_value_dict: set to db datas(key value dictionary)
+    :param host: host name or ip address
+    :param port: specify port number
+    :param db: database number
     :return: none
     """
 
@@ -45,25 +49,10 @@ def set_all_data(key_value_dict):
 
     key_list = list(key_value_dict.keys())
 
-    key_value_list = [[key, key_value_dict[key]] for key in key_list]
+    pool, r = get_redis_connection(host=host, port=port, db=db)
 
-    pool, r = get_redis_connection()
-
-    command_name = "MSET"
-    connection = pool.get_connection(command_name)
-    try:
-        connection.send_command(command_name, key_value_list)
-
-    except (ConnectionError, TimeoutError) as e:
-        connection.disconnect()
-        if not connection.retry_on_timeout and isinstance(e, TimeoutError):
-            raise
-        connection.send_command(command_name)
-
-        return r.parse_response(connection, command_name)
-
-    finally:
-        pool.release(connection)
+    for key in tqdm(key_list):
+        r.set(key, key_value_dict[key])
 
     end = time.time()
 
@@ -118,9 +107,13 @@ def problem_no_60():
     :return:
     """
 
+    db_no = 0
+
     key_value_dict = create_key_value_dict_from_json("./artist.json.gz")
 
-    set_all_data(key_value_dict=key_value_dict)
+    # clear_db(db=db_no)
+
+    set_all_data(key_value_dict=key_value_dict, db=db_no)
 
     return "program_finished"
 
