@@ -4,7 +4,7 @@ create on : 2018/03/11
 project name : NLP_100
 file name : problem_no_62
 
-This problem using nlp.txt
+This problem using artist.json.gz
 This file is available at "http://www.cl.ecei.tohoku.ac.jp/nlp100/".
 This file NOT include this repository.
 If you need file, please get above web site.
