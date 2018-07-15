@@ -61,6 +61,21 @@ def set_all_data(key_value_dict, host="127.0.0.1", port=6379, db=0):
     print("set all data finished")
 
 
+def read_json_data_to_dict(json_path):
+    """ read json file to create dictionary data
+
+    :param json_path: json file paht
+    :return: dictionary data
+    """
+
+    with gzip.open(json_path, mode="rt", encoding="utf-8") as js:
+        all_json_data = js.readlines()
+
+    artist_data = [json.loads(json_data) for json_data in all_json_data]
+
+    return artist_data
+
+
 def create_key_value_dict_from_json(json_path):
     """ create key value dict from json file
 
@@ -68,10 +83,7 @@ def create_key_value_dict_from_json(json_path):
     :return: key value dict
     """
 
-    with gzip.open(json_path, mode="rt", encoding="utf-8") as js:
-        all_json_data = js.readlines()
-
-    artist_data = [json.loads(json_data) for json_data in all_json_data]
+    artist_data = read_json_data_to_dict(json_path)
 
     key_value_dict = {}
 
