@@ -21,6 +21,25 @@ from pymongo import MongoClient
 from problem_no_60 import read_json_data_to_dict
 
 
+def connect_to_mongodb(db_name, collection_name, host="localhost", port=27017):
+    """ connect to mongodb
+
+    :param db_name: database name string
+    :param collection_name: collection name string
+    :param host: host address string
+    :param port: mongodb port no int
+    :return:
+    """
+
+    client = MongoClient(host, port)
+
+    db = client[db_name]
+
+    collection = db[collection_name]
+
+    return client, db, collection
+
+
 def problem_no_64():
     """ create db, collection and insert data and make multi index
 
@@ -28,12 +47,15 @@ def problem_no_64():
     """
 
     db_name = "artist_db"
+    collection_name = "artist_col"
 
-    client = MongoClient("localhost", 27017)
+    client, db, collection = connect_to_mongodb(db_name, collection_name)
 
-    db = client[db_name]
+    # reset database
+    client.drop_database(db)
+    del db, collection
 
-    collection = db["artist_col"]
+    client, db, collection = connect_to_mongodb(db_name, collection_name)
 
     artist_data = read_json_data_to_dict("./artist.json.gz")
 
