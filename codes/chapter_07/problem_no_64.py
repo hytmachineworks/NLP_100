@@ -40,20 +40,11 @@ def problem_no_64():
     result = collection.insert_many(artist_data)
     print(result)
 
-    result = collection.create_index([("name", ASCENDING)])
-    print(result)
+    field_list = ["name", "aliases.name", "tags.value", "rating.value"]
 
-    result = collection.create_index([("aliases.name", ASCENDING)])
-    print(result)
-
-    result = collection.create_index([("tags.value", ASCENDING)])
-    print(result)
-
-    result = collection.create_index([("rating.value", ASCENDING)])
-    print(result)
-
-    for database_name in client.database_names():
-        print(database_name)
+    for field in field_list:
+        print("create index on ", field)
+        print(collection.create_index([(field, ASCENDING)]))
 
     return "program finished"
 
