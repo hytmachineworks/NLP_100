@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+{% block content %}
+  <!-- Form
+  ================================================== -->
+
+<div class="container">
+
+  <h1 class="form-group">
+    {{ message }}
+  </h1>
+
+  <div class="container text-right">
+    <a href="../">initialize</a>
+  </div>
+
+  <form action="/" method="post" class="form-control">
+
+    <div class="form-group">
+      <label for="category">Select category</label>
+      <select id="category" class="form-control" name="category">
+        <option value="name" selected>Artist name</option>
+        <option value="area">Work area</option>
+        <option value="begin">Begin year</option>
+        <option value="end">End year</option>
+        <option value="tags">tags</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="keyword">Input keyword</label>
+      <input type="text" class="form-control" id="keyword" name="keyword" placeholder="Name">
+    </div>
+
+    <button type="submit" class="btn btn-default">Search!</button>
+  </form>
+
+  {% if results %}
+  <table class="table table-hover">
+    <TR>
+     <TD>Artist Name</TD>
+     <TD>Work area</TD>
+     <TD>Begin year</TD>
+     <TD>End year</TD>
+     <TD>tags</TD>
+     <TD>Rating Count</TD>
+    </TR>
+
+    {% for result in results %}
+      <TR>
+       <TD>{{result.name}}</TD>
+       <TD>{{result.area}}</TD>
+       <TD>{{result.begin}}</TD>
+       <TD>{{result.end}}</TD>
+       <TD>{{result.tags}}</TD>
+       <TD>{{result.rating_count}}</TD>
+      </TR>
+    {% endfor %}
+
+  </table>
+  {% endif %}
+
+  {% if not_found %}
+  <div class="container">
+    <p>None item find ...</p>
+  </div>
+  {% endif %}
+
+  <div class="container text-right">
+    <a href="../">initialize</a>
+  </div>
+
+</div>
+
+{% endblock %}
