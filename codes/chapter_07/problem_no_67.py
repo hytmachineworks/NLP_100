@@ -11,7 +11,7 @@ If you need file, please get above web site.
 
 problem : 特定の（指定した）別名を持つアーティストを検索せよ．
 """
-from problem_no_64 import connect_to_mongodb
+from problem_no_69.mongo_function import connect_to_mongodb
 from pprint import pprint
 
 

@@ -16,28 +16,9 @@ problem : アーティスト情報（artist.json.gz）をデータベースに�
                                                    rating.value
 """
 from pymongo import ASCENDING
-from pymongo import MongoClient
 
 from problem_no_60 import read_json_data_to_dict
-
-
-def connect_to_mongodb(db_name, collection_name, host="localhost", port=27017):
-    """ connect to mongodb
-
-    :param db_name: database name string
-    :param collection_name: collection name string
-    :param host: host address string
-    :param port: mongodb port no int
-    :return:
-    """
-
-    client = MongoClient(host, port)
-
-    db = client[db_name]
-
-    collection = db[collection_name]
-
-    return client, db, collection
+from problem_no_69.mongo_function import connect_to_mongodb
 
 
 def problem_no_64():

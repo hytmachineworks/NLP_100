@@ -14,16 +14,9 @@ problem : ユーザから入力された検索条件に合致するアーティ�
           タグ等で検索条件を指定し，
           アーティスト情報のリストをレーティングの高い順などで整列して表示せよ．
 """
-import sys
-from pathlib import Path
-
 from flask import Flask, render_template, request, redirect, url_for
 
-sys.path.append(str(Path().cwd().parents[0]))
-
-from problem_no_68 import search_items
-# True way add PYTHONPATH this way is cheat.
-# not suitable for PEP 8
+from mongo_function import search_items
 
 
 app = Flask(__name__)

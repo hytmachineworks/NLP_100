@@ -15,7 +15,7 @@ problem : MongoDBのインタラクティブシェルを用いて，"Queen"と�
 
 note : MongoDB shell cmds are describe on problem_no_65.cmd
 """
-from problem_no_64 import connect_to_mongodb
+from problem_no_69.mongo_function import connect_to_mongodb
 from pprint import pprint
 
 
