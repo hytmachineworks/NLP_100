@@ -32,6 +32,21 @@ POS_FILE_PATH = "./rt-polaritydata/rt-polarity.pos"
 NEG_FILE_PATH = "./rt-polaritydata/rt-polarity.neg"
 
 
+def pos_neg_check(sentence):
+    """ check sentence positive or negative
+
+    :param sentence: sentence string
+    :return: 0 or 1 int
+    """
+    if re.match(r'^"\+1".*$', sentence):
+        pos_neg = 1
+
+    else:
+        pos_neg = 0
+
+    return pos_neg
+
+
 def file_encoding_detect(file_path):
     """ detect text file encoding
 
@@ -109,7 +124,7 @@ def problem_no_70():
     neg_line = 0
 
     for text_line in read_from_file_line_list:
-        if re.match(r'^"\+1".*$', text_line):
+        if pos_neg_check(text_line):
             pos_line += 1
 
         else:
