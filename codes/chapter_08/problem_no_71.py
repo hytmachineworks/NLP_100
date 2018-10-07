@@ -29,7 +29,7 @@ def get_stopwords_list(file="./sentiment.txt", except_list=None):
     """
 
     # get stopwords from NLTK
-    nltk.download('stopwords')
+    nltk.download("stopwords")
     nltk_stopwords_list = stopwords.words("english")
 
     # get stopwords from document(numeric and sign)
