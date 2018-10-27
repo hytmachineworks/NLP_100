@@ -106,3 +106,5 @@ codes/chapter_04/neko.txt.mecab
 *.png
 *.cabocha
 *.xml
+*.pickle
+codes/chapter_08/rt-polaritydata/rt-polarity.*
