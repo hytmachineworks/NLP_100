@@ -38,6 +38,8 @@ def predict_model(sentence_list):
 
     x_test_list = []
     y_tests = []
+    pred_list = []
+    proba_list = []
 
     for i, sentence in enumerate(sentence_list):
 
@@ -49,20 +51,31 @@ def predict_model(sentence_list):
                   for word in sentiment_model.word_list]
 
         x_test_list.append(x_test)
-
         y_tests.append(label)
 
+        pred = model.predict(np.array([x_test]))[0]
+        pred_list.append(pred)
+
+        proba = model.predict_proba([x_test])[0][1]
+        proba_list.append(proba)
+
         # check model prediction
-        print("no. {}".format(str(i)))
-        print("\nsentence : {}".format(sentence))
+        print("\nno. {}".format(str(i)))
+        print("sentence : {}".format(sentence))
         print("check prediction")
-        print("predict : {}".format(model.predict(np.array([x_test]))[0]))
+        print("predict : {}".format(pred))
         print("actual  : {}".format(label))
+        # check model score
+        print("Predicted probability label is 1 : {}".format(proba))
 
     x_tests = np.array(x_test_list)
 
     # check model score
-    print("\nPredicted probability : {}".format(model.score(x_tests, y_tests)))
+    print("\nover all predicted probability"
+          " : {}".format(model.score(x_tests, y_tests)))
+
+    return [[act, predict, probable]
+            for act, predict, probable in zip(y_tests, pred_list, proba_list)]
 
 
 def problem_no_73():
@@ -76,7 +89,9 @@ def problem_no_73():
 
     select_sentences = all_sentences[:pick_up_sentence]
 
-    predict_model(select_sentences)
+    predict_list = predict_model(select_sentences)
+
+    print(predict_list)
 
     return "program finished"
 
