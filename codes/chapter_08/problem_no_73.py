@@ -22,8 +22,12 @@ def problem_no_73():
 
     :return: message
     """
+
+    with open("./sentiment.txt", mode="r", encoding="utf-8") as f:
+        all_sentences = f.readlines()
+
     # get logistic regression model
-    sentiment_model = SentimentModel("./sentiment.txt",
+    sentiment_model = SentimentModel(all_sentences,
                                      get_pos_list=None,
                                      min_word_length=3)
 
