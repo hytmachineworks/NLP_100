@@ -89,6 +89,10 @@ def predict_model(sentence_list, sentiment_model=None, std_io=True):
 
 
 def problem_no_73():
+    """ predict sentence used by model
+
+    :return: message
+    """
 
     pick_up_sentence = 10
 
