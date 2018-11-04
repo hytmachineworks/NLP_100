@@ -31,7 +31,7 @@ def predict_result_to_dataframe(predict_result):
 def problem_no_76():
     """ predict from sentiment data, output by tsv format
 
-    :return:
+    :return: message
     """
 
     with open("./sentiment.txt", mode="r", encoding="utf-8") as f:
