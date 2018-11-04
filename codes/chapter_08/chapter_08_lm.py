@@ -12,24 +12,24 @@ import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 
-from problem_no_72 import get_feature_from_document
+from problem_no_72 import get_feature_from_sentence_list
 
 
 class SentimentModel:
     """ Logistic Regression from sentence text
     """
 
-    def __init__(self, filename, get_pos_list, min_word_length):
+    def __init__(self, sentence_list, get_pos_list, min_word_length):
         """ initialize class
 
-        :param filename: file name string
+        :param sentence_list: sentence string list
         :param get_pos_list: get part of speech if None get everything list
         :param min_word_length: minimum word lenth int
         """
 
-        feature_list = get_feature_from_document(filename,
-                                                 get_pos_list,
-                                                 min_word_length)
+        feature_list = get_feature_from_sentence_list(sentence_list,
+                                                      get_pos_list,
+                                                      min_word_length)
 
         sentiment_review_array = [[sentiment, " ".join(review)]
                                   for sentiment, review in feature_list]
