@@ -22,6 +22,8 @@ def execute_predict_scores(df):
     :return: dict
     """
 
+    add_offset = 0.00000000000000001
+
     # True Positive count
     t_p = df[(df["predict"] == 1) & (df["actual"] == 1)].shape[0]
 
@@ -34,13 +36,29 @@ def execute_predict_scores(df):
     # False Negative count
     f_n = df[(df["predict"] == 0) & (df["actual"] == 1)].shape[0]
 
-    acurracy = (t_p + t_n) / (t_p + t_n + f_p + f_n)
+    if t_p + t_n + f_p + f_n > 0:
+        acurracy = (t_p + t_n) / (t_p + t_n + f_p + f_n)
 
-    precision = t_p / (t_p + f_p)
+    else:
+        acurracy = (t_p + t_n) / (t_p + t_n + f_p + f_n + add_offset)
 
-    recall = t_p / (t_p + f_n)
+    if t_p + f_p > 0:
+        precision = t_p / (t_p + f_p)
 
-    f_score = (2 * recall * precision) / (recall + precision)
+    else:
+        precision = t_p / (t_p + f_p + add_offset)
+
+    if t_p + f_n > 0:
+        recall = t_p / (t_p + f_n)
+
+    else:
+        recall = t_p / (t_p + f_n + add_offset)
+
+    if recall + precision > 0:
+        f_score = (2 * recall * precision) / (recall + precision)
+
+    else:
+        f_score = (2 * recall * precision) / (recall + precision + add_offset)
 
     result_dict = {"Accuracy": acurracy,
                    "Precision": precision,
