@@ -56,8 +56,7 @@ def problem_no_76():
     :return: message string
     """
 
-    df = pd.read_csv("./predict.txt", sep="\t",
-                     names=["actual", "predict", "probability"])
+    df = pd.read_csv("./predict.txt", sep="\t")
 
     print(execute_predict_scores(df))
 
