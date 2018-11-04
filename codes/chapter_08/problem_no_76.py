@@ -17,6 +17,17 @@ import pandas as pd
 from problem_no_74 import predict_model
 
 
+def predict_result_to_dataframe(predict_result):
+    """ predict result to pandas dataframe
+
+    :param predict_result: predict result list
+    :return: predict result Dataframe
+    """
+    df = pd.DataFrame(predict_result,
+                      columns=["actual", "predict", "probability"])
+    return df
+
+
 def problem_no_76():
     """ predict from sentiment data, output by tsv format
 
@@ -26,11 +37,10 @@ def problem_no_76():
     with open("./sentiment.txt", mode="r", encoding="utf-8") as f:
         all_sentences = f.readlines()
 
-    predict_list = predict_model(all_sentences)
+    predict_list = predict_model(all_sentences, std_io=False)
+    df = predict_result_to_dataframe(predict_list)
 
-    df = pd.DataFrame(predict_list)
-
-    df.to_csv("./predict.txt", sep="\t", index=False, header=False)
+    df.to_csv("./predict.txt", sep="\t", index=False)
 
     return "program finished"
 
