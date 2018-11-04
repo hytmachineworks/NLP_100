@@ -22,13 +22,21 @@ import numpy as np
 from problem_no_72 import sentence_preprocesser
 
 
-def predict_model(sentence_list):
+def predict_model(sentence_list, sentiment_model=None, std_io=True):
+    """ predict sentence used by model
+
+    :param sentence_list: predict sentence list
+    :param sentiment_model: use pickle or model directly SentimentModel Class
+    :param std_io: print standard io boolean
+    :return: predict list
+    """
 
     if not sentence_list:
         raise ValueError("list is vacant")
 
-    with open("./logistic.pickle", mode="br") as f:
-        sentiment_model = pickle.load(f)
+    if not sentiment_model:
+        with open("./logistic.pickle", mode="br") as f:
+            sentiment_model = pickle.load(f)
 
     model = sentiment_model.model
 
@@ -59,20 +67,22 @@ def predict_model(sentence_list):
         proba = model.predict_proba([x_test])[0][1]
         proba_list.append(proba)
 
-        # check model prediction
-        print("\nno. {}".format(str(i)))
-        print("sentence : {}".format(sentence))
-        print("check prediction")
-        print("predict : {}".format(pred))
-        print("actual  : {}".format(label))
-        # check model score
-        print("Predicted probability label is 1 : {}".format(proba))
+        if std_io:
+            # check model prediction
+            print("\nno. {}".format(str(i)))
+            print("sentence : {}".format(sentence))
+            print("check prediction")
+            print("predict : {}".format(pred))
+            print("actual  : {}".format(label))
+            # check model score
+            print("Predicted probability label is 1 : {}".format(proba))
 
     x_tests = np.array(x_test_list)
 
-    # check model score
-    print("\nover all predicted probability"
-          " : {}".format(model.score(x_tests, y_tests)))
+    if std_io:
+        # check model score
+        print("\nover all predicted probability"
+              " : {}".format(model.score(x_tests, y_tests)))
 
     return [[act, predict, probable]
             for act, predict, probable in zip(y_tests, pred_list, proba_list)]
