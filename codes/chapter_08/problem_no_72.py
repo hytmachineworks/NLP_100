@@ -71,23 +71,20 @@ def sentence_preprocesser(sentence, get_pos_list, min_word_length,
     return label, feature_list
 
 
-def get_feature_from_document(filename,
-                              get_pos_list=None, min_word_length=3):
+def get_feature_from_sentence_list(sentence_list,
+                                   get_pos_list=None, min_word_length=3):
     """ get feature list from text file
 
-    :param filename: file name string
+    :param sentence_list: sentence string list
     :param get_pos_list: get part of speech if None get everything list
     :param min_word_length: minimum word lenth int
     :return: feature list list
     """
 
-    with open(filename, mode="r", encoding="utf-8") as f:
-        all_sentences = f.readlines()
-
     feature_list = [sentence_preprocesser(sentence,
                                           get_pos_list=get_pos_list,
                                           min_word_length=min_word_length)
-                    for sentence in all_sentences]
+                    for sentence in sentence_list]
 
     return feature_list
 
@@ -97,7 +94,11 @@ def problem_no_72():
 
     :return: message string
     """
-    feature_list = get_feature_from_document("./sentiment.txt")
+
+    with open("./sentiment.txt", mode="r", encoding="utf-8") as f:
+        all_sentences = f.readlines()
+
+    feature_list = get_feature_from_sentence_list(all_sentences)
 
     for feature in feature_list:
         print(feature)
