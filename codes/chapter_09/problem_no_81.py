@@ -262,8 +262,7 @@ def problem_no_81():
             sort_match_list = sorted(match_list, key=lambda x: len(x))
 
             for match in sort_match_list[::-1]:
-                # convert to full name
-                country_words = country_dict[match].replace(" ", "_")
+                country_words = match.replace(" ", "_")
                 match_countries.append(country_words)
 
                 corpus_mod.replace(match, country_words)
