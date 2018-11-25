@@ -42,7 +42,7 @@ def problem_no_82():
 
     word_dict = {}
 
-    for corpus in tqdm(corpus_data[:30]):
+    for corpus in tqdm(corpus_data):
 
         tokens = corpus.replace("\n", "").split(" ")
 
