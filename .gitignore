@@ -108,5 +108,5 @@ codes/chapter_04/neko.txt.mecab
 *.xml
 *.pickle
 codes/chapter_08/rt-polaritydata/rt-polarity.*
-*.gz2
+*.bz2
 *.json
