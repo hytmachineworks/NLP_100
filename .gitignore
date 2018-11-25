@@ -110,3 +110,4 @@ codes/chapter_04/neko.txt.mecab
 codes/chapter_08/rt-polaritydata/rt-polarity.*
 *.bz2
 *.json
+*.sqlite
