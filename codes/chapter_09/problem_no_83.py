@@ -92,8 +92,6 @@ def calc_f_t_c(sqlite_path):
         table_list = [table[0] for table in cur.fetchall()]
 
         if "f_t_c" in table_list:
-            # sql_delete = "DELETE FROM f_t_c;"
-            # cur.execute(sql_delete)
             return "calculate f(t, c) already finished..."
 
         else:
@@ -142,8 +140,7 @@ def calc_f_t_or_f_c(sqlite_path, calc_target):
         table_list = cur.fetchall()
 
         if table_name in table_list:
-            sql_delete = "DELETE FROM {table};".format(table=table_name)
-            cur.execute(sql_delete)
+            return "calculate f(" + message + ") already finished..."
 
         else:
             sql_create = "CREATE TABLE {table} " \
