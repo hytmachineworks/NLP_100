@@ -23,6 +23,8 @@ problem : 文を単語列に変換する最も単純な方法は，空白文字�
 import bz2
 import re
 
+from tqdm import tqdm
+
 
 def problem_no_80():
     """ strip symbol and remove no word token
@@ -42,7 +44,7 @@ def problem_no_80():
 
     corpus_data = []
 
-    for byte_data in byte_datas:
+    for byte_data in tqdm(byte_datas):
 
         text = byte_data.decode()
 
