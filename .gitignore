@@ -111,3 +111,4 @@ codes/chapter_08/rt-polaritydata/rt-polarity.*
 *.bz2
 *.json
 *.sqlite
+*.npz
