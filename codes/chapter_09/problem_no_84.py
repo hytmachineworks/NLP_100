@@ -205,7 +205,7 @@ def create_word_vector_x(sqlite_path):
 
         cur.execute(sql_x)
 
-        print("make COO data\n")
+        print("\nmake COO data\n")
 
         row_list = []
         col_list = []
