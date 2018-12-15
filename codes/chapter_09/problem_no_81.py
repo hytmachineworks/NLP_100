@@ -270,38 +270,36 @@ def problem_no_81():
     :return: message string
     """
 
-    country_dict = get_country_dict()
-    country_keys = list(country_dict.keys())
+    country_list = get_country_list()
 
     with open("./en_wiki_corpus.txt", mode="r", encoding="utf-8") as f:
         corpus_org = f.readlines()
 
     corpus_data = []
 
-    match_countries = []
-
     for corpus in tqdm(corpus_org):
-        match_list = [country for country in country_keys
-                      if country in corpus and " " in country]
 
-        corpus_mod = corpus
+        corpus_mod = corpus.replace("\n", "")
 
-        if match_list:
-            # find a country
+        match_list = [country for country in country_list
+                      if country in corpus_mod]
+
+        if match_list:  # find a country
             sort_match_list = sorted(match_list, key=lambda x: len(x))
 
             for match in sort_match_list[::-1]:
                 country_words = match.replace(" ", "_")
-                match_countries.append(country_words)
 
-                corpus_mod.replace(match, country_words)
+                corpus_mod = corpus_mod.replace(match, country_words)
 
-        corpus_data.append(corpus_mod)
+        reduce_corpus = [token for token in corpus_mod.split(" ")
+                         if len(token) >= 3 and (token.isalpha()
+                                                 or token.isnumeric())]
+
+        corpus_data.append(" ".join(reduce_corpus) + "\n")
 
     with open("./en_wiki_corpus_mod.txt", mode="w", encoding="utf-8") as f:
         f.writelines(corpus_data)
-
-    pprint(match_countries)
 
     return "program_finished"
 
