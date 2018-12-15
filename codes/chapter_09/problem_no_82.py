@@ -40,8 +40,6 @@ def problem_no_82():
     with open("./en_wiki_corpus_mod.txt", mode="r", encoding="utf-8") as f:
         corpus_data = f.readlines()
 
-    word_dict = {}
-
     for corpus in tqdm(corpus_data):
 
         tokens = corpus.replace("\n", "").split(" ")
@@ -55,16 +53,10 @@ def problem_no_82():
 
         for i, token in enumerate(tokens):
 
-            if token in word_dict.keys():
-                d = word_dict[token]
-
-            else:
-                d = random.choice([1, 2, 3, 4, 5])
-
-                word_dict[token] = d
+            d = random.choice([1, 2, 3, 4, 5])
 
             start = i - d if (i - d) > 0 else 0
-            end = i + d
+            end = i + d if (i + d) <= corpus_length else corpus_length
 
             capture_list = tokens[start: end]
 
