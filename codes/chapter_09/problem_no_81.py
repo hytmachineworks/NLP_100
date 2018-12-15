@@ -28,8 +28,6 @@ import json
 import os
 import re
 
-from pprint import pprint
-
 import certifi
 import urllib3
 from bs4 import BeautifulSoup
@@ -233,6 +231,37 @@ def get_country_dict(json_path="./country.json", from_json=True):
         json.dump(all_country_dict, json_dump)
 
     return all_country_dict
+
+
+def get_country_list(compund=True):
+    """ get country name data list
+
+    :param compund: compound word only boolean
+    :return: country name list
+    """
+
+    country_dict = get_country_dict()
+    country_keys = list(country_dict.keys())
+
+    char_list = [")", "(", ",", "."]
+
+    strip_char_list = []
+
+    for country in country_keys:
+
+        mod_country = country
+
+        for char in char_list:
+            mod_country = mod_country.replace(char, "")
+
+        strip_char_list.append(mod_country)
+
+    if not compund:
+        return strip_char_list
+
+    compound_list = [match for match in strip_char_list if " " in match]
+
+    return compound_list
 
 
 def problem_no_81():
