@@ -89,7 +89,7 @@ def problem_no_80():
             if "http" in result:
                 result = ""
 
-            result = re.sub(r"[,.0-9]+", "0000", result)
+            result = re.sub(r"[,.0-9]+", "00", result)
 
             if result:
                 token_list.append(result)

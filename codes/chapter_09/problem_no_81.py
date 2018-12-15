@@ -293,8 +293,7 @@ def problem_no_81():
                 corpus_mod = corpus_mod.replace(match, country_words)
 
         reduce_corpus = [token for token in corpus_mod.split(" ")
-                         if len(token) >= 3 and (token.isalpha()
-                                                 or token.isnumeric())]
+                         if len(token) >= 3]
 
         corpus_data.append(" ".join(reduce_corpus) + "\n")
 
