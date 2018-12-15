@@ -37,10 +37,10 @@ def problem_no_80():
     with bz2.open(file_path, mode="r") as f:
         byte_datas = f.readlines()
 
-    re_comp_start = re.compile(r"^[.,!?;:()[\]'\"#@=]*")
-    re_comp_end = re.compile(r"[.,!?;:()[\]'\"#@=]*$")
+    re_comp_start = re.compile(r"^[.,!?;:()[\]'\"#@=“”’ —…–（），~：［·+\-«]*")
+    re_comp_end = re.compile(r"[.,!?;:()[\]'\"#@=“”’ —…–（），~：［·+\-$»]*$")
 
-    re_html = re.compile(r"<[/a-zA-Z].*?>")
+    re_html = re.compile(r"[<＜][/a-zA-Z].*?[>＞]")
 
     corpus_data = []
 
@@ -48,28 +48,30 @@ def problem_no_80():
 
         text = byte_data.decode()
 
-        text = text.replace("\n", "")
+        text = re.sub(r"\s", " ", text)
+        text = re.sub(r"</?\s?br/?>", " ", text)
+        text = text.replace("{", " {")
+        text = text.replace("}", "} ")
+        text = text.replace("[", " [")
+        text = text.replace("]", "] ")
+        text = text.replace("(", " (")
+        text = text.replace("(", ") ")
+        text = text.replace("…", "… ")
+        text = text.replace("—", "— ")
+        text = text.replace("-", "- ")
+        text = text.replace("’", "'")
+        text = text.replace("“", '"')
+        text = text.replace("”", '"')
+        text = text.replace('"', ' " ')
+        text = text.replace("$$", "$")
+        text = text.replace("$$", "$")
+        text = text.replace("$$", "$")
+        text = text.replace("$$", "$")
 
         html_tags = re_html.findall(text)
 
         for html_tag in html_tags:
-
-            html_items = html_tag.split(" ")
-
-            if "=" in html_tag or\
-                    "/>" == html_tag[-2:] or "</" == html_tag[:2]:
-                before_str = html_tag
-                after_str = html_tag
-
-            elif len(html_items) < 3:
-                before_str = html_tag
-                after_str = html_tag
-
-            else:
-                before_str = html_tag
-                after_str = html_tag[1: -1]
-
-            text = text.replace(before_str, after_str)
+            text = text.replace(html_tag, "")
 
         token_org_list = text.split(" ")
 
@@ -84,8 +86,10 @@ def problem_no_80():
 
             result = token_org[re_start_pos: re_end_pos]
 
-            if len(result) == 1 and (result.isalpha() or result.isnumeric()):
+            if "http" in result:
                 result = ""
+
+            result = re.sub(r"[,.0-9]+", "0000", result)
 
             if result:
                 token_list.append(result)
