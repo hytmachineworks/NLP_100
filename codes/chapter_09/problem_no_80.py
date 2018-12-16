@@ -40,13 +40,17 @@ def problem_no_80():
     re_comp_start = re.compile(r"^[.,!?;:()[\]'\"#@=“”’ —…–（），~：［·+\-«]*")
     re_comp_end = re.compile(r"[.,!?;:()[\]'\"#@=“”’ —…–（），~：［·+\-$»]*$")
 
-    re_html = re.compile(r"[<＜][/a-zA-Z].*?[>＞]")
+    re_html = re.compile(r"[<＜].*?[>＞]")
+
+    url_pattern = r"https?://[0-9a-zA-Z!\"#$%&'()*+,-./:;<=>?@\[\]\\^_`{|}~]+"
 
     corpus_data = []
 
     for byte_data in tqdm(byte_datas):
 
         text = byte_data.decode()
+
+        text = re.sub(url_pattern, "", text)
 
         text = re.sub(r"\s", " ", text)
         text = re.sub(r"</?\s?br/?>", " ", text)
@@ -68,7 +72,7 @@ def problem_no_80():
         text = text.replace("$$", "$")
         text = text.replace("$$", "$")
 
-        html_tags = re_html.findall(text)
+        html_tags = sorted(re_html.findall(text), key=lambda x: len(x))
 
         for html_tag in html_tags:
             text = text.replace(html_tag, "")
@@ -89,13 +93,18 @@ def problem_no_80():
             if "http" in result:
                 result = ""
 
-            result = re.sub(r"[,.0-9]+", "00", result)
+            # all numeric change to "00"
+            result = re.sub(r"[0-9]+?", "00", result)
+            result = re.sub(r"[,.]?00[,.]?", "00", result)
+            result = re.sub(r"(00)+", "00", result)
 
             if result:
                 token_list.append(result)
 
+        corpus_str = " ".join(token_list)+"\n"
+
         if token_list:
-            corpus_data.append(" ".join(token_list)+"\n")
+            corpus_data.append(corpus_str)
 
     with open("./en_wiki_corpus.txt", mode="w", encoding="utf-8") as f:
         f.writelines(corpus_data)
