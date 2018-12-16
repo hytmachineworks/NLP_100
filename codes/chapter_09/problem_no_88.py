@@ -41,7 +41,14 @@ def get_t_word(t_word_index, sqlite_path):
     return t_word
 
 
-def calculate_cos_dist_most_common(search_word, given_vector, x_vector):
+def calculate_cos_dist_most_common(search_word_list, given_vector, x_vector):
+    """ calculate and find most common 10 words
+
+    :param search_word_list: search word list
+    :param given_vector: given word normalized vector
+    :param x_vector: normalized word vector x
+    :return: most common word and cos distance list
+    """
 
     sqlite_path = "./en_wiki_data.sqlite"
 
@@ -75,7 +82,7 @@ def problem_no_88():
     result_list = calculate_cos_dist_most_common([target_word],
                                                  vec_england, x_vector)
 
-    print(target_word, "most relative words")
+    print(target_word, "most relative words\n")
     for word, cos_dist in result_list:
         print(word, cos_dist)
 
