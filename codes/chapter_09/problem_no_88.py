@@ -51,11 +51,11 @@ def calculate_cos_dist_most_common(search_word, given_vector, x_vector):
 
     most_common_list = []
 
-    for t_idx in sort_indexs[:11]:
+    for t_idx in sort_indexs[:10 + len(search_word_list)]:
         t_word = get_t_word(t_idx, sqlite_path)
         cos_dist = cos_dist_array[t_idx]
 
-        if t_word != search_word:
+        if t_word not in search_word_list:
             most_common_list.append((t_word, cos_dist))
 
     return most_common_list[:10]
@@ -64,7 +64,7 @@ def calculate_cos_dist_most_common(search_word, given_vector, x_vector):
 def problem_no_88():
     """ search most relative word with England
 
-    :return:
+    :return: message string
     """
 
     target_word = "England"
@@ -72,7 +72,7 @@ def problem_no_88():
     x_vector = load_x_vector_svd_result(norm=True)
     vec_england = word_vec(target_word, x_vector)
 
-    result_list = calculate_cos_dist_most_common(target_word,
+    result_list = calculate_cos_dist_most_common([target_word],
                                                  vec_england, x_vector)
 
     print(target_word, "most relative words")
