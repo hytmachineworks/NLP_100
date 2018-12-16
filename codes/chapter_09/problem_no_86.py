@@ -17,10 +17,11 @@ problem : 85で得た単語の意味ベクトルを読み込み，"United States
 import datetime
 import sqlite3
 
+import numpy as np
 from numpy import load
 
 
-def load_x_vector_svd_result():
+def load_x_vector_svd_result(norm=False):
     """ load x vector svd result matrix
 
     :return: x vector matrix numpy matrix
@@ -29,6 +30,12 @@ def load_x_vector_svd_result():
     x_vector_file = load("./x_vector_svd.npz")
 
     x_vector = x_vector_file["arr_0"]
+
+    if norm:
+        norm_array = np.linalg.norm(x_vector, axis=1)
+        norm_x_vector = x_vector / norm_array[:, np.newaxis]
+
+        return norm_x_vector
 
     return x_vector
 
