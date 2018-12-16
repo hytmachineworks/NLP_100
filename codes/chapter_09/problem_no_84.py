@@ -92,9 +92,12 @@ def ppmi_insert_to_sqlite(sqlite_path, n):
 
         for t_word, c_word, f_t_c, f_t, f_c in tqdm(cur):
 
+            if f_t_c < 10:
+                continue
+
             ppmi = math.log2(((n * f_t_c) / (f_t * f_c)))
 
-            if ppmi >= 10:
+            if ppmi > 0:
                 i += 1
                 cur_write.execute("INSERT INTO ppmi VALUES (?,?,?);",
                                   (t_word, c_word, ppmi))
