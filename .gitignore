@@ -112,3 +112,4 @@ codes/chapter_08/rt-polaritydata/rt-polarity.*
 *.json
 *.sqlite
 *.npz
+*.model*
