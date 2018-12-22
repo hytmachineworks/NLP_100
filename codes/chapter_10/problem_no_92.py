@@ -111,7 +111,7 @@ def problem_no_92():
 
     filename = "./analogy_family_word2vec.txt"
     with open(filename, mode="w", encoding="utf8") as f_word2vec:
-        f_word2vec.writelines(x_vector_list)
+        f_word2vec.writelines(word2vec_list)
 
     return "program finished"
 
