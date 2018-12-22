@@ -32,6 +32,20 @@ def problem_no_92():
     :return: message string
     """
 
+    def result_formatter(analogy_line, calc_result):
+        """ format calculate result
+
+        :param analogy_line: analogy word list in current line
+        :param calc_result: calculate result
+        :return: format result string
+        """
+
+        word = calc_result[0][0]
+        cos = str(calc_result[0][1])
+        result = " ".join(analogy_line + [word, cos]) + "\n"
+
+        return result
+
     x_vector = load_x_vector_svd_result(norm=True)
 
     corpus_file_path = "../chapter_09/en_wiki_corpus_mod.txt"
@@ -93,15 +107,11 @@ def problem_no_92():
 
             print(result_word2vec)
 
-        x_vector_word = result_x_vector[0][0]
-        x_vector_cos = str(result_x_vector[0][1])
-        x_vector_result = " ".join(analogy + [x_vector_word, x_vector_cos])
-        word2vec_word = result_word2vec[0][0]
-        word2vec_cos = str(result_word2vec[0][1])
-        word2vec_result = " ".join(analogy + [word2vec_word, word2vec_cos])
+        x_vector_result = result_formatter(analogy, result_x_vector)
+        x_vector_list.append(x_vector_result)
 
-        x_vector_list.append(x_vector_result + "\n")
-        word2vec_list.append(word2vec_result + "\n")
+        word2vec_result = result_formatter(analogy, result_word2vec)
+        word2vec_list.append(word2vec_result)
 
         print("\n\n")
 
