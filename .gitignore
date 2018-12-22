@@ -115,3 +115,4 @@ codes/chapter_08/rt-polaritydata/rt-polarity.*
 *.model*
 *.zip
 *.csv
+*.npy
