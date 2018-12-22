@@ -20,20 +20,33 @@ from problem_no_86 import load_x_vector_svd_result
 from problem_no_86 import word_vec
 
 
+def two_words_similarity(word_a, word_b, x_vector=None):
+    """ calculate two words cos distance
+
+    :param word_a: word wants to calc similarity string
+    :param word_b: word wants to calc similarity string
+    :param x_vector: x_vector numpy array
+    :return: cosin distance float
+    """
+
+    if x_vector is None:
+        x_vector = load_x_vector_svd_result(norm=True)
+
+    vec_united_states = word_vec(word_a, x_vector)
+    vec_u_s = word_vec(word_b, x_vector)
+
+    cos_dist = np.dot(vec_united_states, vec_u_s)
+
+    return cos_dist
+
+
 def problem_no_87():
     """ calculate cos distance between 'Unites States' and 'U.S'
 
     :return: message string
     """
 
-    x_vector = load_x_vector_svd_result(norm=True)
-
-    vec_united_states = word_vec("United_States", x_vector)
-    vec_u_s = word_vec("U.S", x_vector)
-
-    cos_dist = np.dot(vec_united_states, vec_u_s)
-
-    print("cos distance :", cos_dist)
+    print("cos distance :", two_words_similarity("United_States", "U.S"))
 
     return "program finished"
 
