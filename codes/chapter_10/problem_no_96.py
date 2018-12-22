@@ -22,7 +22,7 @@ from problem_no_90 import word_convert_to_vector_model
 
 
 def problem_no_96():
-    """ pick up only contry word vector
+    """ pick up only country word vector
 
     :return: message string
     """
