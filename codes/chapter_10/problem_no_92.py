@@ -105,7 +105,7 @@ def problem_no_92():
                                                     negative=neg_list_word2vec,
                                                     topn=1)
 
-            print(result_word2vec)
+        print(result_word2vec)
 
         x_vector_result = result_formatter(analogy, result_x_vector)
         x_vector_list.append(x_vector_result)
