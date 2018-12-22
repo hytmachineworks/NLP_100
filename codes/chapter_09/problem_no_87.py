@@ -21,6 +21,10 @@ from problem_no_86 import word_vec
 
 
 def problem_no_87():
+    """ calculate cos distance between 'Unites States' and 'U.S'
+
+    :return: message string
+    """
 
     x_vector = load_x_vector_svd_result(norm=True)
 
