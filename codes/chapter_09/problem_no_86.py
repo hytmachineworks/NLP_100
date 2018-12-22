@@ -16,6 +16,7 @@ problem : 85で得た単語の意味ベクトルを読み込み，"United States
 """
 import datetime
 import sqlite3
+import os
 
 import numpy as np
 from numpy import load
@@ -27,7 +28,9 @@ def load_x_vector_svd_result(norm=False):
     :return: x vector matrix numpy matrix
     """
 
-    x_vector_file = load("./x_vector_svd.npz")
+    pwd = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
+
+    x_vector_file = load(pwd + "x_vector_svd.npz")
 
     x_vector = x_vector_file["arr_0"]
 
@@ -40,15 +43,16 @@ def load_x_vector_svd_result(norm=False):
     return x_vector
 
 
-def word_vec(search_str, x_vector=load_x_vector_svd_result()):
-    """ find a word vector from x vector
+def search_t_word_index(search_str):
+    """ find t word index number
 
     :param search_str: to search word string
-    :param x_vector: x vector numpy matrix
-    :return: word vector numpy array
+    :return: t word index int
     """
 
-    sqlite_path = "./en_wiki_data.sqlite"
+    pwd = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
+
+    sqlite_path = pwd + "en_wiki_data.sqlite"
 
     with sqlite3.connect(sqlite_path) as conn:
 
@@ -58,9 +62,32 @@ def word_vec(search_str, x_vector=load_x_vector_svd_result()):
 
         cur.execute(sql.format(word=search_str))
 
-        t_word_index = cur.fetchone()[0]
+        t_word_index_fetch = cur.fetchone()
 
-    result_vector = x_vector[t_word_index]
+    if t_word_index_fetch:
+        t_word_index = t_word_index_fetch[0]
+
+    else:
+        t_word_index = None
+
+    return t_word_index
+
+
+def word_vec(search_str, x_vector=load_x_vector_svd_result()):
+    """ find a word vector from x vector
+
+    :param search_str: to search word string
+    :param x_vector: x vector numpy matrix
+    :return: word vector numpy array
+    """
+
+    t_word_index = search_t_word_index(search_str)
+
+    if t_word_index:
+        result_vector = x_vector[t_word_index]
+
+    else:
+        result_vector = np.zeros(300)
 
     return result_vector
 

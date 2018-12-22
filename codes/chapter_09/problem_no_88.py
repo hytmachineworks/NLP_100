@@ -14,6 +14,7 @@ problem : 85で得た単語の意味ベクトルを読み込み，
 
 """
 import sqlite3
+import os
 
 import numpy as np
 
@@ -41,16 +42,19 @@ def get_t_word(t_word_index, sqlite_path):
     return t_word
 
 
-def calculate_cos_dist_most_common(search_word_list, given_vector, x_vector):
-    """ calculate and find most common 10 words
+def calculate_cos_dist_most_common(search_word_list, given_vector,
+                                   x_vector, topn=10):
+    """ calculate and find most common words
 
     :param search_word_list: search word list
     :param given_vector: given word normalized vector
     :param x_vector: normalized word vector x
+    :param topn: top most similar words count int
     :return: most common word and cos distance list
     """
 
-    sqlite_path = "./en_wiki_data.sqlite"
+    pwd = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
+    sqlite_path = pwd + "en_wiki_data.sqlite"
 
     cos_dist_array = np.dot(x_vector, given_vector)
 
@@ -58,14 +62,14 @@ def calculate_cos_dist_most_common(search_word_list, given_vector, x_vector):
 
     most_common_list = []
 
-    for t_idx in sort_indexs[:10 + len(search_word_list)]:
+    for t_idx in sort_indexs[:topn + len(search_word_list)]:
         t_word = get_t_word(t_idx, sqlite_path)
         cos_dist = cos_dist_array[t_idx]
 
         if t_word not in search_word_list:
             most_common_list.append((t_word, cos_dist))
 
-    return most_common_list[:10]
+    return most_common_list[:topn]
 
 
 def problem_no_88():
