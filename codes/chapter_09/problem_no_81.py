@@ -208,9 +208,19 @@ def get_country_dict(json_path="./country.json", from_json=True):
     :return: country name and dependent territory name dict
     """
 
+    pwd = os.path.dirname(os.path.abspath(__file__)).replace("\\", "/") + "/"
+    pwd_json_path = pwd + "country.json"
+
     # load from json but not exist json file make a new file
     if os.path.exists(json_path) and from_json:
         with open(json_path, mode="r", encoding="utf-8") as json_load:
+            all_country_dict = json.load(json_load)
+
+        return all_country_dict
+
+    elif json_path == "./country.json" \
+            and os.path.exists(pwd_json_path) and from_json:
+        with open(pwd_json_path, mode="r", encoding="utf-8") as json_load:
             all_country_dict = json.load(json_load)
 
         return all_country_dict
