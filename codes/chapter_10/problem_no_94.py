@@ -76,11 +76,11 @@ def problem_no_94():
 
         print("\n\n")
 
-    filename = "./wordsim353_x_vector.txt"
+    filename = "./wordsim353_x_vector.csv"
     with open(filename, mode="w", encoding="utf8") as f_x_vector:
         f_x_vector.writelines(x_vector_list)
 
-    filename = "./wordsim353_word2vec.txt"
+    filename = "./wordsim353_word2vec.csv"
     with open(filename, mode="w", encoding="utf8") as f_word2vec:
         f_word2vec.writelines(word2vec_list)
 
