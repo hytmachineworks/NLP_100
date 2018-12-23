@@ -31,7 +31,7 @@ def load_country_list():
 
 
 def problem_no_97():
-    """ clustering 5 culster by k-means method
+    """ clustering 5 cluster by k-means method
 
     :return: message string
     """
