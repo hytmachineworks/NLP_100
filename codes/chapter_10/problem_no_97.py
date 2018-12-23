@@ -30,16 +30,27 @@ def load_country_list():
     return country_list
 
 
-def problem_no_97():
-    """ clustering 5 cluster by k-means method
+def get_country_cluster():
+    """ clustering 5 cluster list by k-means method
 
-    :return: message string
+    :return:
     """
 
     country_vector = load("./country_vector.npy")
 
     kmeans = KMeans(n_clusters=5, random_state=0).fit(country_vector)
     country_cluster = list(kmeans.labels_)
+
+    return country_cluster
+
+
+def problem_no_97():
+    """ clustering 5 cluster by k-means method
+
+    :return: message string
+    """
+
+    country_cluster = get_country_cluster()
 
     # divide by country cluster
     country_list = load_country_list()
