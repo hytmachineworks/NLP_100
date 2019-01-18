@@ -2,7 +2,15 @@
 """
 create on : 2018/12/07
 project name : NLP_100
-file name : problem_no_85 
+file name : problem_no_85
+
+This problem using enwiki-20150112-400-r10-105752.txt.bz2
+This file is available at "http://www.cl.ecei.tohoku.ac.jp/nlp100/".
+This file NOT include this repository.
+If you need file, please get above web site.
+
+problem : 84で得られた単語文脈行列に対して，
+          主成分分析を適用し，単語の意味ベクトルを300次元に圧縮せよ．
 
 """
 import datetime
