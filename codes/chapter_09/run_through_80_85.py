@@ -17,7 +17,6 @@ from problem_no_85 import problem_no_85
 
 if __name__ == "__main__":
     start = datetime.datetime.now()
-    print("problem no.80 to 85 start at datetime :", start)
 
     print("problem no 80 ----------------------")
     print(problem_no_80())
@@ -33,7 +32,9 @@ if __name__ == "__main__":
     print(problem_no_85())
 
     end = datetime.datetime.now()
-    print("problem no.80 to 85 end at datetime :", end)
-
     elapse = end - start
+
+    print("\nrun through problem no.80 to 85 finished !!!!!!\n")
+    print("problem no.80 to 85 start at datetime :", start)
+    print("problem no.80 to 85 end at datetime :", end)
     print("problem no.80 to 85 elapsed time", elapse)
