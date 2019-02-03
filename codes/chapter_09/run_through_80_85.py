@@ -6,6 +6,7 @@ file name : run_through_80_85
 
 easy to try problem no.80 to 85
 """
+import datetime
 from problem_no_80 import problem_no_80
 from problem_no_81 import problem_no_81
 from problem_no_82 import problem_no_82
@@ -15,6 +16,9 @@ from problem_no_85 import problem_no_85
 
 
 if __name__ == "__main__":
+    start = datetime.datetime.now()
+    print("problem no.80 to 85 start at datetime :", start)
+
     print("problem no 80 ----------------------")
     print(problem_no_80())
     print("problem no 81 ----------------------")
@@ -27,3 +31,9 @@ if __name__ == "__main__":
     print(problem_no_84())
     print("problem no 85 ----------------------")
     print(problem_no_85())
+
+    end = datetime.datetime.now()
+    print("problem no.80 to 85 end at datetime :", end)
+
+    elapse = end - start
+    print("problem no.80 to 85 elapsed time", elapse)
